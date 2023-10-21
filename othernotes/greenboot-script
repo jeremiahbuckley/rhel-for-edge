@@ -1,0 +1,11 @@
+
+#!/bin/bash
+
+if [ -n "$(ls -A /var/dumps/*.dump 2>/dev/null)" ]
+then
+  echo "Crashdumps found, check failed!"
+  exit 1
+else
+  echo "No crashdumps found, check passed!"
+  exit 0
+fi

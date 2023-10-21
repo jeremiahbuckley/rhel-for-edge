@@ -1,0 +1,5 @@
+ssh-keygen
+or
+ssh-keygen -f my-key-name
+
+https://www.ssh.com/academy/ssh/keygen

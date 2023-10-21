@@ -1,0 +1,32 @@
+name = "nginx"
+description = "nginx"
+version = "3.0.2"
+modules = []
+groups = []
+distro = ""
+
+[[packages]]
+name = "clippy"
+version= "1.62.1"
+
+[[packages]]
+name="nginx"
+version="1.14.1"
+
+[[packages]]
+name="tree"
+
+[[packages]]
+name="wget"
+
+[[packages]]
+name="erlang"
+
+[[customizations.user]]
+name = "Topper"
+description = "Thoroughbed"
+password = "<encrypted-password-rh-docs-have-a-one-liner-for-generating-this>"
+key = "<public-rsa-key-all-one-line>"
+home = "/home/Topper/"
+shell = "/usr/bin/bash"
+groups = ["wheel"]

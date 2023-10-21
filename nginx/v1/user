@@ -1,0 +1,8 @@
+[[customizations.user]]
+name = "Topper"
+description = "Thoroughbed"
+password = "<encrypted-password-rh-docs-have-a-one-liner-for-generating-this>"
+key = "<public-rsa-key-here-all-one-line>"
+home = "/home/Topper/"
+shell = "/usr/bin/bash"
+groups = ["wheel"]

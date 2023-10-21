@@ -1,0 +1,18 @@
+
+# ignore rsa keys
+*_rsa
+*_rsa.pub
+
+
+# don't ignore .gitignore files, so empty directories can be created
+!.gitignore
+
+# ignore compose artifacts
+osbuild.log
+*-commit.tar
+*-container.tar
+*-installer.iso
+*-logs.tar
+
+# ignore files that start with a UUID
+[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]*
