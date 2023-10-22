@@ -19,7 +19,12 @@ When working with VMs hosted on one machine, it is easiest to set them up using 
 
 What needs to be done after downloading the repo. (Sometimes problems can happen if you don't use sudo. Once you start using sudo, all the files get tagged with root so... your sort of stuck in sudo-land after that point anyways)
 
-PART 1: Get a customized iso file
+## PART 1: Get a customized iso file
+Relevant doc links
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/composing_installing_and_managing_rhel_for_edge_images/composing-a-rhel-for-edge-image-using-image-builder-command-line_composing-installing-managing-rhel-for-edge-images#doc-wrapper
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/composing_installing_and_managing_rhel_for_edge_images/composing-a-rhel-for-edge-image-using-image-builder-command-line_composing-installing-managing-rhel-for-edge-images#creating-a-rhel-for-edge-installer-image-using-command-line-interface-for-non-network-based-deployments_composing-a-rhel-for-edge-image-using-image-builder-command-line
+
+PART 1 is the foundational knowledge. If you haven't done this before it could take days to get right, because: composer-builds take 20-30 minutes and rhel installs take 45 minutes. So, cycling on errors / mistakes takes a long time. I think getting PART 1 good for someone who knows what's up would take, on average 2 or 3 hours. Just because of the cycle time for correcting small errors.
 
 1. Create an ssh key using ssh-keygen and store both parts in the keys directory. Also, make sure the public part is one-line, and add it in the right place in the 3 nginx.toml files and (if you want) the user file 
 
@@ -47,7 +52,7 @@ PART 1: Get a customized iso file
 
 First part done, you have an iso!
 
-PART 1 Test
+### PART 1 Test
 
 10. Test it by going to the cocpit GUI, and Virtual Machines, launch a new VM, using a local install media, then browse to  /vms/, then, when the locations reads "/vms", hit the dropdown again to see your UUID.iso file that the UI discovered. Everything else can be default, I like to double the disk and 4x the RAM, but whatever.
 
@@ -55,7 +60,12 @@ PART 1 Test
 
 12. The actual rpm-ostree will be wrong. I'm not sure if this is a bug, seems like a bug. Check it out at /etc/ostree/remotes.d/rhel, there's a url in there that probably points to fil:///something/something. Change that to be url=http://123.456.789.123:8085/repo . At this point the command rpm-ostree upgrade --check should work (that is : not-error, there won't be any upgrades at this time in the process)
 
-PART 2 Get an ede update to work:
+## PART 2 Get an edge update to work:
+Relevant docs:
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/composing_installing_and_managing_rhel_for_edge_images/edge-terminology-and-commands_composing-installing-managing-rhel-for-edge-images#rpm-ostree-commands_edge-terminology-and-commands
+https://docs.fedoraproject.org/en-US/iot/applying-updates-UG/
+want to try automatic updates? https://miabbott.github.io/2018/06/13/rpm-ostree-automatic-updates.html
+
 
 13. push v2/nginx.toml file to composer-cli blueprints (e.g. composer-cli blueprints push /path/to/v2/nginx.toml )
 
@@ -73,7 +83,8 @@ Upgrade hosted, now check it on the guest vm.
 
 PART 2 done, you have successfully upgraded from v1, to v2
 
-PART 3 - Greenboot!
+## PART 3 - Greenboot!
+Relevant docs: https://github.com/fedora-iot/greenboot
 
 19. Downgrade the guest vm (rpm-ostree downgrade -r), because you want to check greenboot. The way to demo greenboot is to create a fake crash dump and show the upgrade doesn't happen when the file exists.
 
@@ -87,7 +98,7 @@ PART 3 - Greenboot!
 
 Part 3 done!
 
-PART 4 - If you want, get the actual initial install to work seamlessly. 
+## PART 4 - If you want, get the actual initial install to work seamlessly. 
 Honestly, this isn't going to be part of a demo. Installing an OS takes forever and everyone knows this, so starting the demo with "I already created all the test machines to save time." is a pretty reasonable strategy. But if YOU want to do it to keep yourself honest, here's what I have to do.
 
 1. Host a kickstart file, which includes ostree params.
