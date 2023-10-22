@@ -45,7 +45,9 @@ PART 1 is the foundational knowledge. If you haven't done this before it could t
 9. host the image in podman, punching a route to 8080 on the container (podman run -d -p 8085:8080 localhost/my-tag-probably-nginx-container:1.0.0)
 
 10. buld an edge-installer image, with the same "ref" param, and url = localhost:8085 (port same as the line above, where you exposed 8080) example: composer-cli compose start-ostree nginx --ref my-ref --url http://123.456.789.123:8085/repo edge-installer
+
 10.a. the "/repo" part is important, if you get the ref, url, port, or /repo part wrong, the composer should error out (quickly!) and tell you it can't find the ref
+
 10.b. when I run this demo all-on-one-box, I use (ip addr) and look for the inet address in the vibr0 section and use that. I assume that's the IP address all the guest vms can see
 
 11. pull down the result (composer-cli compose results UUID), and extract it (tar -xvf UUID.tar), and move the .iso file to somewhere easy to access (I make a root directory "/vms" and put the isos there).
@@ -127,10 +129,12 @@ But, when demoing what's actually happening on the edge devices, the cmd line is
 - showing "status" info
 - doing diffs between commits
 - showing configuration file contents and logs contents
+
 It's better to do this via the demo-machine's shell window, since the shell holds a history of all the commands, and you can scroll-up on the screen to see some output from a previous command. Yes, cockpit has a window for Terminal access, but it doesn't have that scroll-up capability across multiple guest VMs that a shell on the main demoing laptop has.
 
 The two commands you need to know are:
 - sudo virsh list (show all the running vms)
 - sudo virsh domifaddr my-vm-name (show the ipaddress of my vm)
+
 Then you can (ssh user@my-vm-ipaddress -i keys/my_rsa) to log in via a shell
 
